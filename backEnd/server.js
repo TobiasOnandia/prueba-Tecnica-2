@@ -16,6 +16,7 @@ app.get('/api/items', (req,res) => {
         res.send(filteredProducts)
         return
     }
+
     res.send(products)
 })
 

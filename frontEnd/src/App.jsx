@@ -1,15 +1,14 @@
 import './App.css'
+import { RenderProducts } from './Components/RenderProducts'
 import styles from './styles.module.css'
-function App() {
 
+function App () {
   return (
     <>
-      <div>
+
+      <div className={styles.layout}>
         <h1>Bazar Online</h1>
-        <form action="" className={styles.form}>
-          <input type="text" />
-          <button>Buscar</button>
-        </form>
+        <RenderProducts />
       </div>
     </>
   )
