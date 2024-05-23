@@ -14,6 +14,7 @@ app.get('/items', (req,res) => {
     res.send(products)
 })
 
+//filter product by params 
 
 app.get('/items/:id', (req,res) => {
     console.log(req.params.id)
