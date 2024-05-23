@@ -28,7 +28,7 @@ export function RenderProducts () {
         <button>Buscar</button>
       </form>
 
-      <Suspense fallback='...cargando'>
+      <Suspense fallback='Cargando...'>
         <ShowProducts fetchProducts={useFetch()} />
       </Suspense>
     </article>
