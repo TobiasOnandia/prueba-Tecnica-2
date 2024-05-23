@@ -11,11 +11,14 @@ app.disable('x-powered-by')
 
 
 app.get('/api/items', (req,res) => {
+    
     if(req.query.q){
         const filteredProducts = products.filter(product => product.title.toLowerCase().includes(req.query.q.toLowerCase()))
         res.send(filteredProducts)
         return
     }
+
+
 
     res.send(products)
 })

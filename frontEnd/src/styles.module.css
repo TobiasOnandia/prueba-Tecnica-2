@@ -1,7 +1,7 @@
 .layout{
-    height: 100vh;
     display: grid;
     place-content: center;
+    text-align: start;
 }
 
 
@@ -14,4 +14,12 @@
     & > button {
         margin-top: 6px;
     }
+}
+
+.button{
+    cursor: pointer;
+}
+
+.p{
+    max-width: 50%;
 }

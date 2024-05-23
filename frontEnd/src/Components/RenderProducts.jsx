@@ -1,25 +1,23 @@
-import { useState, use, Suspense } from 'react'
-
+import { useState, use, Suspense, useDeferredValue } from 'react'
 import styles from '../styles.module.css'
 
 export function RenderProducts () {
   const [search, setSearch] = useState('')
+  const deferredValue = useDeferredValue(search)
 
   const useFetch = () => {
     if (!search) return Promise.resolve()
 
-    return fetch(`http://localhost:3000/api/items?q=${search}`)
+    return fetch(`http://localhost:3000/api/items?q=${deferredValue}`)
       .then(res => {
-        console.log(res)
         if (res.ok) return res.json()
-
-        return { error: true, message: ` No se a encontrado resultados de : ${search}` }
+        return { error: true, message: ` No se a encontrado resultados de : ${deferredValue}` }
       })
   }
 
   return (
     <article>
-      <form action='' className={styles.form}>
+      <form action='' onSubmit={(e) => { e.preventDefault() }} className={styles.form}>
         <input
           type='text'
           placeholder='Ej.Iphone'
@@ -27,7 +25,6 @@ export function RenderProducts () {
         />
         <button>Buscar</button>
       </form>
-
       <Suspense fallback='Cargando...'>
         <ShowProducts fetchProducts={useFetch()} />
       </Suspense>
@@ -38,7 +35,6 @@ export function RenderProducts () {
 // eslint-disable-next-line react/prop-types
 function ShowProducts ({ fetchProducts }) {
   const products = use(fetchProducts)
-  console.log(products)
 
   if (products?.error) {
     return <p>Error : {products.message}</p>
@@ -54,7 +50,10 @@ function ShowProducts ({ fetchProducts }) {
           return (
             <article key={item.id}>
               <h3>{item.title}</h3>
-              <p>{item.description}</p>
+              <p className={styles.p}>{item.description}</p>
+              <a href={`/api/items/${item.id}`}>
+                Ir al detalle del producto
+              </a>
             </article>
           )
         })
