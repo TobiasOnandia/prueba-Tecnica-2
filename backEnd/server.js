@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import {products} from './mock.js'
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -8,18 +9,16 @@ app.use(express.json()) //midddleware
 app.use(cors()) //enable cors
 app.disable('x-powered-by')
 
-app.get('/',  (req,res) => {
-    res.send({message: 'hello worlds'})
-})
-
 
 app.get('/items', (req,res) => {
-    res.send({message: 'pagina items'})
+    res.send(products)
 })
 
 
 app.get('/items/:id', (req,res) => {
-    res.send("pagina del detalle")
+    console.log(req.params.id)
+    const prod = products.filter(product => product.id === Number(req.params.id))
+    res.send(prod)
 })
 
 
