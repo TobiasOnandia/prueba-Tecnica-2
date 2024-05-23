@@ -4,7 +4,7 @@ import cors from 'cors'
 const app = express()
 const PORT = process.env.PORT || 3000
 
-app.use(express.json())
+app.use(express.json()) //midddleware 
 app.use(cors()) //enable cors
 app.disable('x-powered-by')
 
